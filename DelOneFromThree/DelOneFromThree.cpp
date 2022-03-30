@@ -5,76 +5,131 @@
 #include <string>
 using namespace std;
 
-//有一个数组 a[N] 顺序存放 0 ~N - 1 ，要求每隔两个数删掉一个数，到末尾时循环至开头继续进行，求最后一个被删掉的数的原始下标位置。以 8 个数(N = 7) 为例 :｛ 0，1，2，3，4，5，6，7 ｝，0 -> 1 -> 2 (删除) -> 3 -> 4 -> 5 (删除) -> 6 -> 7 -> 0 (删除), 如此循环直到最后一个数被删除。
-//数据范围： 1<= n <= 1000
-
-void BuildArray(int iArray[],int iLen);
-
-void DelNum(int iArray[], int iLen);
-
-int main()
+int  main()
 {
 	int iLen = 0;
-	//char cLen = getchar();
-	//string strLen(&cLen);
-	string strLen;
-	cin >> strLen;
-	iLen = atoi(strLen.c_str());
+	char ccstr[5];
+	cin.getline(ccstr, 5);
+	iLen = atoi(ccstr);
 	int *iArray = new int[iLen];
-
-	BuildArray(iArray, iLen);
-	DelNum(iArray, iLen);
-
-	delete []iArray;
-	iArray = NULL;
-    std::cout << "Hello World!\n";
-}
-
-void BuildArray(int iArray[], int iLen)
-{
-	for (int i = 0; i<iLen; i++)
+	for (int i = 0; i < iLen; i++)
 	{
 		iArray[i] = i;
 	}
-}
-
-void DelNum(int iArray[], int iLen)
-{
-	int iCount = 0;
-	int iCurLen = iLen;
-	for (int i = 0; iCurLen>0; iCount++,i++)
+	int iCurPos = 0;
+	int CurLen = iLen;
+	for (int i = 0; CurLen > 0; iCurPos++, i++)
 	{
-		if (iCurLen==1)
+		if (CurLen == 1)
 		{
-			std::cout << iArray[0] << endl;
-			iArray[0] = -1;
-			iCurLen--;
-			iCount = 0;
+			i = 0;
+			cout << iArray[i];
+			iArray[i] = -1;
+			CurLen--;
+			iCurPos = 0;
+			break;
 		}
-		if (i >= iCurLen)
+		if (i >= CurLen)
 		{
 			i = 0;
 		}
 
-		if (2==iCount)
+		if (2 == iCurPos)
 		{
-			for (int j = i; j< iCurLen;j++)
+			for (int j = i; j < CurLen; j++)
 			{
-				if (j+1<iCurLen)
+				if (j + 1 < CurLen)
 				{
 					iArray[j] = iArray[j + 1];
 				}
-				else
-				{
+				else {
 					iArray[j] = -1;
 				}
 			}
-			iCount = 0;
-			--iCurLen;
-			--i;
+			//开始的时候并没有考虑到这种情况
+			if(iCurPos == CurLen-1)
+			{
+				i = 0;
+			}
+			--CurLen;
+			iCurPos = 0;
 		}
 	}
+
+	delete[]iArray;
+	iArray = NULL;
 }
+//
+////有一个数组 a[N] 顺序存放 0 ~N - 1 ，要求每隔两个数删掉一个数，到末尾时循环至开头继续进行，求最后一个被删掉的数的原始下标位置。以 8 个数(N = 7) 为例 :｛ 0，1，2，3，4，5，6，7 ｝，0 -> 1 -> 2 (删除) -> 3 -> 4 -> 5 (删除) -> 6 -> 7 -> 0 (删除), 如此循环直到最后一个数被删除。
+////数据范围： 1<= n <= 1000
+//
+//void BuildArray(int iArray[],int iLen);
+//
+//void DelNum(int iArray[], int iLen);
+//
+//int main()
+//{
+//	int iLen = 0;
+//	//char cLen = getchar();
+//	//string strLen(&cLen);
+//	string strLen;
+//	cin >> strLen;
+//	iLen = atoi(strLen.c_str());
+//	int *iArray = new int[iLen];
+//
+//	BuildArray(iArray, iLen);
+//	DelNum(iArray, iLen);
+//
+//	delete []iArray;
+//	iArray = NULL;
+//    std::cout << "Hello World!\n";
+//}
+//
+//void BuildArray(int iArray[], int iLen)
+//{
+//	for (int i = 0; i<iLen; i++)
+//	{
+//		iArray[i] = i;
+//	}
+//}
+//
+//void DelNum(int iArray[], int iLen)
+//{
+//	int iCount = 0;
+//	int iCurLen = iLen;
+//	for (int i = 0; iCurLen>0; iCount++,i++)
+//	{
+//		if (iCurLen==1)
+//		{
+//			std::cout << iArray[0] << endl;
+//			iArray[0] = -1;
+//			iCurLen--;
+//			iCount = 0;
+//		}
+//		if (i >= iCurLen)
+//		{
+//			i = 0;
+//		}
+//
+//		if (2==iCount)
+//		{
+//			for (int j = i; j< iCurLen;j++)
+//			{
+//				if (j+1<iCurLen)
+//				{
+//					iArray[j] = iArray[j + 1];
+//				}
+//				else
+//				{
+//					iArray[j] = -1;
+//				}
+//			}
+//			iCount = 0;
+//			--iCurLen;
+//			--i;
+//		}
+//	}
+//}
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单
