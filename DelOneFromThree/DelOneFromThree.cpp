@@ -1,143 +1,109 @@
-﻿// DelOneFromThree.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
-
+﻿//双端队列实现
 #include <iostream>
-#include <string>
-using namespace std;
+#include <queue>
 
-int  main()
+using namespace std;
+int main()
 {
 	int iLen = 0;
-	char ccstr[5];
-	cin.getline(ccstr, 5);
-	iLen = atoi(ccstr);
-	int *iArray = new int[iLen];
-	for (int i = 0; i < iLen; i++)
+	while (cin>>iLen)
 	{
-		iArray[i] = i;
-	}
-	int iCurPos = 0;
-	int CurLen = iLen;
-	for (int i = 0; CurLen > 0; iCurPos++, i++)
-	{
-		if (CurLen == 1)
+		if (iLen<1)
 		{
-			i = 0;
-			cout << iArray[i];
-			iArray[i] = -1;
-			CurLen--;
-			iCurPos = 0;
-			break;
+			iLen = 1;
 		}
-		if (i >= CurLen)
+		else if (iLen>1000)
 		{
-			i = 0;
+			iLen = 1000;
 		}
 
-		if (2 == iCurPos)
+		queue<int> q;
+		for (int i = 0; i<iLen; i++)
 		{
-			for (int j = i; j < CurLen; j++)
-			{
-				if (j + 1 < CurLen)
-				{
-					iArray[j] = iArray[j + 1];
-				}
-				else {
-					iArray[j] = -1;
-				}
-			}
-			//开始的时候并没有考虑到这种情况
-			if(iCurPos == CurLen-1)
-			{
-				i = 0;
-			}
-			--CurLen;
-			iCurPos = 0;
+			q.push(i);
 		}
-	}
 
-	delete[]iArray;
-	iArray = NULL;
+		int Cont = 0;
+		while (q.size()>1)
+		{
+			if (Cont == 2)
+			{
+				q.pop();
+				Cont = 0;
+			}
+			else
+			{
+				int iTemp = q.front();
+				q.pop();
+				q.push(iTemp);
+				Cont++;
+			}
+		}
+
+		int iTemp = q.front();
+		q.pop();
+		cout << iTemp << endl;
+
+	}
 }
+
+//普通数组模拟
+
+//#include <iostream>
+//#include <string>
+//using namespace std;
 //
-////有一个数组 a[N] 顺序存放 0 ~N - 1 ，要求每隔两个数删掉一个数，到末尾时循环至开头继续进行，求最后一个被删掉的数的原始下标位置。以 8 个数(N = 7) 为例 :｛ 0，1，2，3，4，5，6，7 ｝，0 -> 1 -> 2 (删除) -> 3 -> 4 -> 5 (删除) -> 6 -> 7 -> 0 (删除), 如此循环直到最后一个数被删除。
-////数据范围： 1<= n <= 1000
-//
-//void BuildArray(int iArray[],int iLen);
-//
-//void DelNum(int iArray[], int iLen);
-//
-//int main()
+//int  main()
 //{
 //	int iLen = 0;
-//	//char cLen = getchar();
-//	//string strLen(&cLen);
-//	string strLen;
-//	cin >> strLen;
-//	iLen = atoi(strLen.c_str());
+//	char ccstr[5];
+//	cin.getline(ccstr, 5);
+//	iLen = atoi(ccstr);
 //	int *iArray = new int[iLen];
-//
-//	BuildArray(iArray, iLen);
-//	DelNum(iArray, iLen);
-//
-//	delete []iArray;
-//	iArray = NULL;
-//    std::cout << "Hello World!\n";
-//}
-//
-//void BuildArray(int iArray[], int iLen)
-//{
-//	for (int i = 0; i<iLen; i++)
+//	for (int i = 0; i < iLen; i++)
 //	{
 //		iArray[i] = i;
 //	}
-//}
-//
-//void DelNum(int iArray[], int iLen)
-//{
-//	int iCount = 0;
-//	int iCurLen = iLen;
-//	for (int i = 0; iCurLen>0; iCount++,i++)
+//	int iCurPos = 0;
+//	int CurLen = iLen;
+//	for (int i = 0; CurLen > 0; iCurPos++, i++)
 //	{
-//		if (iCurLen==1)
+//		if (CurLen == 1)
 //		{
-//			std::cout << iArray[0] << endl;
-//			iArray[0] = -1;
-//			iCurLen--;
-//			iCount = 0;
+//			i = 0;
+//			cout << iArray[i];
+//			iArray[i] = -1;
+//			CurLen--;
+//			iCurPos = 0;
+//			break;
 //		}
-//		if (i >= iCurLen)
+//		if (i >= CurLen)
 //		{
 //			i = 0;
 //		}
 //
-//		if (2==iCount)
+//		if (2 == iCurPos)
 //		{
-//			for (int j = i; j< iCurLen;j++)
+//			for (int j = i; j < CurLen; j++)
 //			{
-//				if (j+1<iCurLen)
+//				if (j + 1 < CurLen)
 //				{
 //					iArray[j] = iArray[j + 1];
 //				}
-//				else
-//				{
+//				else {
 //					iArray[j] = -1;
 //				}
 //			}
-//			iCount = 0;
-//			--iCurLen;
-//			--i;
+//			//开始的时候并没有考虑到这种情况
+//			if(iCurPos == CurLen-1)
+//			{
+//				i = 0;
+//			}
+//			--CurLen;
+//			iCurPos = 0;
 //		}
 //	}
+//
+//	delete[]iArray;
+//	iArray = NULL;
 //}
-
-// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
-// 调试程序: F5 或调试 >“开始调试”菜单
-
-// 入门使用技巧: 
-//   1. 使用解决方案资源管理器窗口添加/管理文件
-//   2. 使用团队资源管理器窗口连接到源代码管理
-//   3. 使用输出窗口查看生成输出和其他消息
-//   4. 使用错误列表窗口查看错误
-//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
-//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
