@@ -10,14 +10,14 @@ using namespace std;
 int main()
 {
 	char* str = new char[101];
-	
-	while (cin.getline(str, 100))
+	while (cin.getline(str, 100))//scanf("%s", str);
 	{
-
 		int *Num = new int[256]{0};
-		for (int i = 0; i<strlen(str); i++)
+		char tempC;
+		int i = 0;
+		while (tempC = str[i++])
 		{
-			char tempC = str[i];
+			
 			if (0== Num[tempC]++)
 			{
 				cout << tempC;
@@ -25,6 +25,7 @@ int main()
 		}  
 	}
 	delete []str;
+	return 0;
 }
 
 
