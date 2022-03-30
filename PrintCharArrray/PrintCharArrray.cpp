@@ -2,6 +2,34 @@
 //输入一个字符串，求出该字符串包含的字符集合，按照字母输入的顺序输出。
 //数据范围：输入的字符串长度满足  ，且只包含大小写字母，区分大小写。
 //1<=n<=1000
+
+
+#if 1
+#include <iostream>
+using namespace std;
+int main()
+{
+	char* str = new char[101];
+	
+	while (cin.getline(str, 100))
+	{
+
+		int *Num = new int[256]{0};
+		for (int i = 0; i<strlen(str); i++)
+		{
+			char tempC = str[i];
+			if (0== Num[tempC]++)
+			{
+				cout << tempC;
+			}
+		}  
+	}
+	delete []str;
+}
+
+
+#else
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -26,7 +54,7 @@ int main()
 
 		if (cTemp >= 'A' && cTemp <= 'Z')
 		{
-			if (iFlages[cTemp - 'A' ] & 2)
+			if (iFlages[cTemp - 'A'] & 2)
 			{
 				continue;
 			}
@@ -39,3 +67,6 @@ int main()
 	delete[]iFlages;
 	delete[]inputStr;
 }
+
+
+#endif
