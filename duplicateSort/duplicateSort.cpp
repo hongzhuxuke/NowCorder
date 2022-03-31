@@ -1,4 +1,45 @@
-﻿#include <iostream>
+﻿
+#if 1
+
+#include <iostream>
+
+using namespace std;
+int main()
+{
+	int iN = 0;
+	if (scanf("%d", &iN)) {
+		int i = 0;
+		int *iArrary = new int[iN] {0};
+		while (i < iN)
+		{
+			int iTemp = 0;
+			scanf("%d", &iTemp);
+			if (iTemp < 100)
+			{
+				iArrary[iTemp % 100] = iTemp;
+			}
+			else
+			{
+				int Num = iTemp / 100;
+				iArrary[iTemp % (Num * 100)] = iTemp;
+			}
+			i++;
+		}
+		for (i = 0; i < iN; i++)
+		{
+			if (iArrary[i] > 0)
+				printf("%d\n", iArrary[i]);
+		}
+
+		delete[]iArrary;
+	}
+
+	return 0;
+}
+
+#else
+
+#include <iostream>
 using namespace std;
 void CountSort(int iArray[], int iStart, int iLen)
 {
@@ -104,3 +145,4 @@ int main()
 	delete[]iNumArray;
 	return 0;
 }
+#endif
