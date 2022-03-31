@@ -5,7 +5,7 @@
 注意：本题存在多组输入。输入的 0 表示输入结束，并不用输出结果。
 */
 
-#if 1
+#if 0
 
 #include <iostream>
 using namespace  std;
@@ -30,8 +30,16 @@ int main()
 	char strNum[5];
 	while (true)
 	{
+
 		cin.getline(strNum, 5);
 		iNum = atoi(strNum);
+		//以下关键信息 第一次做题没有看到
+		//输入的 0 表示输入结束，并不用输出结果。   
+
+		if (iNum == 0)
+		{
+			break;
+		}
 		if (iNum <= 1)
 		{
 			iNum = 1;
