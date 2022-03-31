@@ -21,7 +21,6 @@ int main()
 	return 0;
 }
 
-
 #else
 #include <iostream>
 using namespace std;
