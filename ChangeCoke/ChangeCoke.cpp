@@ -5,6 +5,24 @@
 注意：本题存在多组输入。输入的 0 表示输入结束，并不用输出结果。
 */
 
+#if 1
+
+#include <iostream>
+using namespace  std;
+
+//通过数学分析，最后获得的饮料数是总空瓶数整除2 。
+int main()
+{
+	int iN = 0;
+	while (scanf_s("%d", &iN) && iN>0)
+	{
+		printf("%d\n", iN / 2);
+	}
+	return 0;
+}
+
+
+#else
 #include <iostream>
 using namespace std;
 int main()
@@ -15,11 +33,11 @@ int main()
 	{
 		cin.getline(strNum, 5);
 		iNum = atoi(strNum);
-		if (iNum<=1)
+		if (iNum <= 1)
 		{
 			iNum = 1;
 		}
-		else if (iNum>=100)
+		else if (iNum >= 100)
 		{
 			iNum = 100;
 		}
@@ -48,3 +66,4 @@ int main()
 	}
 	return 0;
 }
+#endif
