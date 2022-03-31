@@ -1,5 +1,5 @@
 ﻿
-#if 1
+#if 0
 
 #include <iostream>
 
@@ -9,23 +9,16 @@ int main()
 	int iN = 0;
 	if (scanf("%d", &iN)) {
 		int i = 0;
-		int *iArrary = new int[iN] {0};
+		int *iArrary = new int[501] {0};
 		while (i < iN)
 		{
 			int iTemp = 0;
 			scanf("%d", &iTemp);
-			if (iTemp < 100)
-			{
-				iArrary[iTemp % 100] = iTemp;
-			}
-			else
-			{
-				int Num = iTemp / 100;
-				iArrary[iTemp % (Num * 100)] = iTemp;
-			}
+			iArrary[iTemp] = iTemp;
 			i++;
 		}
-		for (i = 0; i < iN; i++)
+
+		for (i = 0; i < 501; i++)
 		{
 			if (iArrary[i] > 0)
 				printf("%d\n", iArrary[i]);
@@ -54,9 +47,19 @@ void CountSort(int iArray[], int iStart, int iLen)
 		int iTemp = iArray[i] % bitNum;
 		iArrayTemp[iTemp] = iArray[i];
 	}
-	for (int i = iStart; i < iLen; i++)
+
+	//此处第一次并没有考虑iArrayTemp和iArray存放数组坐标不一致问题
+	int iCur = 0;
+	for (int i = 0; i<100; i++)
 	{
-		iArray[i] = iArrayTemp[i];
+		if (iArrayTemp[i]>0)
+		{
+			iArray[iStart+iCur++] = iArrayTemp[i];
+		}
+	}
+	for (int i = iStart + iCur; i < iLen; i++)
+	{
+		iArray[i] = 0;
 	}
 	delete[]iArrayTemp;
 }
@@ -67,7 +70,7 @@ void buckSort(int iArray[], int iLen)
 	for (int i = 0; i < iLen; i++)
 	{
 		int iTemp = iArray[i] / 100;
-		iTemp %= 10;
+		//iTemp %= 10;
 		iCount[iTemp]++;
 	}
 
@@ -80,7 +83,7 @@ void buckSort(int iArray[], int iLen)
 	for (int i = 0; i < iLen; i++)
 	{
 		int iTemp = iArray[i] / 100;
-		iTemp %= 10;
+		//iTemp %= 10;//此处计算多余了
 		if (iTemp > 0)
 		{
 			iTempArray[iCount[iTemp - 1]++] = iArray[i];
@@ -99,7 +102,7 @@ void buckSort(int iArray[], int iLen)
 	for (int i = 0; i < iLen; i++)
 	{
 		int iTemp = iArray[i] / 100;
-		iTemp %= 10;
+		//iTemp %= 10;
 		iCount[iTemp]++;
 	}
 
@@ -134,7 +137,7 @@ int main()
 	}
 	buckSort(iNumArray, iN);
 
-	for (int i = 0; i < iN; i++)
+	for (i = 0; i < iN; i++)
 	{
 		if (iNumArray[i] > 0)
 		{
