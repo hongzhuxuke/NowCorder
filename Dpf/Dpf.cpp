@@ -174,7 +174,7 @@ void DpfByStack(Node* pNode)
 		return;
 	}
 	stack<Node*> stk;
-	ProssNode(pNode);
+	//ProssNode(pNode);//此处注意whil循环内部进行处理节点，此处不需要了
 	stk.push(pNode);
 
 	Node* ptempNode = pNode;
@@ -185,7 +185,7 @@ void DpfByStack(Node* pNode)
 		stk.pop();
 		if (pNode == NULL)
 		{
-			return;
+			continue;//return;//注意不是 return ，而是continue
 		}
 		ProssNode(pNode);
 		stk.push(pNode->mRightNode);
