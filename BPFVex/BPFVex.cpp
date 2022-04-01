@@ -4,6 +4,7 @@
 using namespace std;
 
 #define MXNUM 100
+int *iVistRecode;
 
 struct CALGraph
 {
@@ -22,9 +23,22 @@ int main()
 	CALGraph g;
 	buildGraph(g);
 	char v;
+	iVistRecode = new int[g.miVexCount]{ 0 };
+#if 0
+	//无向连通图广度搜索
 	scanf("%c", &v);
+	
 	visiteGraph(g, v);
-    //std::cout << "Hello World!\n";
+#else
+	//无向非连通图广度搜索
+	for (int i = 0; i < g.miVexCount; i++)
+	{
+		visiteGraph(g, g.mVex[i]);
+	}
+
+#endif
+
+	delete[]iVistRecode;
 }
 
 int GetVexIndex(CALGraph& g, char v)
@@ -91,33 +105,40 @@ void visiteGraph(CALGraph& g, char v)
 		iStartI = 0;
 	}
 	
-	int *iVistRecode = new int[g.miVexCount]{0};
-	iVistRecode[iStartI] = 1;
-	printf("%c ", g.mVex[iStartI]);
-
-	queue<char> q;
-	q.push(g.mVex[iStartI]);
-	while (!q.empty())
+	
+	if (iVistRecode[iStartI])
 	{
-		char temp = q.front();
-		q.pop();
-		int iCV = GetVexIndex(g, temp);
-		if (iCV>=0)
-			for (int i = 0; i < g.miArcCount; i++)
-			{
-				if (g.miArc[iCV][i] && !iVistRecode[i])
-				{
-					printf("%c ", g.mVex[i]);
-					iVistRecode[i] = 1;
-					q.push(g.mVex[i]);
-				}
-			}
+		return;
 	}
+	else
+	{
+		iVistRecode[iStartI] = 1;
+		printf("%c ", g.mVex[iStartI]);
 
+		queue<char> q;
+		q.push(g.mVex[iStartI]);
+		while (!q.empty())
+		{
+			char temp = q.front();
+			q.pop();
+			int iCV = GetVexIndex(g, temp);
+			if (iCV >= 0)
+				for (int i = 0; i < g.miArcCount; i++)
+				{
+					if (g.miArc[iCV][i] && !iVistRecode[i])
+					{
+						printf("%c ", g.mVex[i]);
+						iVistRecode[i] = 1;
+						q.push(g.mVex[i]);
+					}
+				}
+		}
 
+	}
+	
 
+	
 
-	delete[]iVistRecode;
 }
 
 
