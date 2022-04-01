@@ -55,9 +55,9 @@ int main()
 	buildGraph(g);
 	iVistRecode = new int[g.iVexN+1]{0};
 	char v;
-	getchar();
 	printf("Enter:");
 	scanf("%c", &v);
+	getchar();
 	visiteGraph(g, v);
 
 	//delete []iVistRecode;
@@ -87,22 +87,23 @@ void buildGraph(CALGraph& g)
 	printf("Enter Vex Num:\n");
 
 	scanf("%d", &iNum);
-
+	getchar();
 	g.iVexN = iNum;
 	for (int i = 0; i < iNum; i++)
 	{
 		scanf("%c", &g.ves[i].cData);
+		getchar();
 	}
 
 	scanf("%d", &g.iArcN);
-
+	getchar();
 	char v1, v2;
 	int iX, iY;
 
 	for (int i = 0; i < g.iArcN; i++)
 	{
 		scanf("%c%c", &v1, &v2);
-		//getchar();
+		getchar();
 		iX = GetVexIndex(g, v1);
 		iY = GetVexIndex(g, v2);
 		
