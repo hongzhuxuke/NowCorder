@@ -181,32 +181,15 @@ void DpfByStack(Node* pNode)
 
 	while (!stk.empty())
 	{
-		if (ptempNode)
-		{
-			ptempNode = ptempNode->mLeftNode;
-			while (ptempNode)
-			{
-				ProssNode(ptempNode);
-				stk.push(ptempNode);
-				ptempNode = ptempNode->mLeftNode;
-			}
-		}
-
-
-		ptempNode = stk.top();
+		Node* pNode = stk.top();
 		stk.pop();
-		
-		if (NULL== ptempNode )
+		if (pNode == NULL)
 		{
-			continue;
+			return;
 		}
-		ptempNode = ptempNode->mRightNode;
-		if (!ptempNode)
-		{
-			continue;
-		}
-		ProssNode(ptempNode);
-		stk.push(ptempNode);
+		ProssNode(pNode);
+		stk.push(pNode->mRightNode);
+		stk.push(pNode->mLeftNode);
 		
 	}
 }
