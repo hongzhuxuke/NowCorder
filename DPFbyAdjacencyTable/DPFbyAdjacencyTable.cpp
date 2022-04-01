@@ -2,7 +2,7 @@
 //
 
 #include <iostream>
-
+using namespace std;
 #define MAXNUM 100
 struct ArcNode
 {
@@ -56,8 +56,7 @@ int main()
 	iVistRecode = new int[g.iVexN+1]{0};
 	char v;
 	printf("Enter:");
-	scanf("%c", &v);
-	getchar();
+	cin >> v;
 	visiteGraph(g, v);
 
 	//delete []iVistRecode;
@@ -86,24 +85,25 @@ void buildGraph(CALGraph& g)
 	int iNum = 0;
 	printf("Enter Vex Num:\n");
 
-	scanf("%d", &iNum);
-	getchar();
+	cin >> iNum;
+	
 	g.iVexN = iNum;
 	for (int i = 0; i < iNum; i++)
 	{
-		scanf("%c", &g.ves[i].cData);
-		getchar();
+		cin >>g.ves[i].cData;
+		
 	}
 
-	scanf("%d", &g.iArcN);
-	getchar();
+	cin >> g.iArcN;
+	
 	char v1, v2;
 	int iX, iY;
 
 	for (int i = 0; i < g.iArcN; i++)
 	{
-		scanf("%c%c", &v1, &v2);
-		getchar();
+		cin >> v1;
+		cin >> v2;
+		
 		iX = GetVexIndex(g, v1);
 		iY = GetVexIndex(g, v2);
 		
