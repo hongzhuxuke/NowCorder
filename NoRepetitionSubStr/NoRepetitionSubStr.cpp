@@ -26,7 +26,6 @@ int CalSubStrLenth(char arrayStr[], int ilen)
 			occ.erase(arrayStr[i-1]);//有重复的 就从第一个位置开始删除
 		}
 
-	
 		while (iCk + 1 < ilen && occ.count(arrayStr[iCk+1]) <=0)
 		{
 			occ.insert(arrayStr[iCk + 1]);//没有重复的就插入滑动数组
@@ -37,7 +36,6 @@ int CalSubStrLenth(char arrayStr[], int ilen)
 		{
 			max = occ.size();
 		}
-		 
 	}
 
 	return max;
