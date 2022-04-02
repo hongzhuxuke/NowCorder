@@ -1,6 +1,8 @@
 ﻿#include <iostream>
 using namespace std;
-
+/*给您两个非空的链表，表示两非负整数.它们每位数字都是按照逆序的方式存储，
+并且每个节点只能存一位数字。请你将两个数相加，并以相同的形式返回一个表示和的链表
+*/
 struct listNode 
 {
 	int Value;
