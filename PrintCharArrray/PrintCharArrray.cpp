@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {
 	char* str = new char[101];
-	while (cin.getline(str, 100))//scanf("%s", str);
+	while (cin.getline(str, 100))//多行输入，ctrl+z 退出
 	{
 		int *Num = new int[256]{0};
 		char tempC;
@@ -23,10 +23,13 @@ int main()
 				cout << tempC;
 			}
 		}  
+		cout << endl; //格式错误:您的程序输出的格式不符合要求（比如空格和换行与要求不一致）
 	}
+	
 	delete []str;
 	return 0;
 }
+
 
 
 #else
