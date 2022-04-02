@@ -36,8 +36,6 @@ std::vector<int> CalTarge(int iArray[], int iMaxN, int iTarge)
 				return iRef;
 			}
 			Result[iArray[i]] =  i;
-			//Result.insert(std::pair<const_cast<int>( iArray[i]), i>);
-			//Result.insert(unordered_map<int,int>.value_type(  iArray[i], i));
 		}
 
 	}
