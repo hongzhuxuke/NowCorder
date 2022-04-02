@@ -36,14 +36,18 @@ public:
 	 */
 	string longestCommonPrefix(vector<string>& strs) {
 		// write code here
-		if (strs.size() == 0) return "";
-		int index = 0;
-		int iMinLen = -1;
-		string strComp = strs[0];
-		for (int i = 1; i < strs.size(); i++)
+		string strComp = "";
+		if (strs.size() > 0)
 		{
-			strComp = CalPreFix(strComp, strs[i]);
+			int index = 0;
+			int iMinLen = -1;
+			strComp = strs[0];
+			for (int i = 1; i < strs.size(); i++)
+			{
+				strComp = CalPreFix(strComp, strs[i]);
+			}
 		}
+
 		return strComp;
 	}
 
@@ -51,7 +55,7 @@ public:
 	{
 		int iMinL = str1.length() > str2.length() ? str2.length() : str1.length();
 		int i = 0;
-		char* temp = new char[iMinL] {'\0'};
+		char* temp = new char[iMinL+1] {'\0'};//忘记考虑越界问题
 		while (i < iMinL)
 		{
 			if (str1.at(i) != str2.at(i)) break;
