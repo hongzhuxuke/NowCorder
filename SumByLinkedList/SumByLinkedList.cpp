@@ -21,7 +21,8 @@ struct listNode
 listNode* CalSum(listNode* l1, listNode* l2);
 int main()
 {
-	//用连标配list1逆序表示数字343
+	//用连标配list1逆序表示数字543
+	//链表中存储第一个节点表示个位（3），第二个节点表示十分位（4），第三个节点表示百分位（5）
 	listNode*  list1 = new listNode;
 	list1->Value = 3;
 	listNode*  temp = new listNode;
