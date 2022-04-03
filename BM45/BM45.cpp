@@ -11,7 +11,7 @@
 using namespace std;
 
 class Solution {
-public:
+public://题目要求 O（n）的复杂度  所以，错误
 	static vector<int> maxInWindows(const vector<int>& nums, int size) {
 		vector<int> ref;
 		//int cur = 0;
