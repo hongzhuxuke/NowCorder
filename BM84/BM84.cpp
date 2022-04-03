@@ -72,6 +72,14 @@ public:
 };
 int main()
 {
+	for (int i = 1; i < 2; i++)
+	{
+		std::cout << "xkdddkkk" << endl;
+	}
+	for (int i = 1; i < 0; i++)
+	{
+		std::cout << "xkkkk" << endl;
+	}
 	Solution sl;
 	vector<string> vec;
 	vec.push_back("abca");
