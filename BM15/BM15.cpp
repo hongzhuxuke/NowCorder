@@ -30,6 +30,35 @@ struct ListNode {
 	struct ListNode *next;
  };
  
+#if 1
+
+class Solution {
+public:
+	ListNode* deleteDuplicates(ListNode* head) {
+		if (NULL == head) return NULL;
+		ListNode* p = head;
+		while (p)
+		{
+			if (p->next)
+			{
+				if (p->val == p->next->val)
+				{
+					ListNode* c = p->next;
+					p->next = p->next->next;
+					c->next = NULL;
+					delete c;
+				}
+				else
+					p = p->next;
+			}
+			else//别忘记移动指针
+				p = p->next;
+		}
+		return head;
+	}
+};
+
+#else
 
 class Solution {
 public:
@@ -59,6 +88,8 @@ public:
 		return head;
 	}
 };
+#endif
+
 int main()
 {
     std::cout << "Hello World!\n";
