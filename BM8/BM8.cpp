@@ -42,6 +42,7 @@ i
 #include <iostream>
 
 
+
   struct ListNode {
  	int val;
  	struct ListNode *next;
@@ -50,6 +51,30 @@ i
  
 class Solution {
 public:
+	//进阶法
+	ListNode* FindKthToTail(ListNode* pHead, int k) {
+		ListNode* fast = pHead;
+		ListNode* slow = pHead;
+		for (int i = 0; i < k; i++)
+		{
+			if (fast)
+			{
+				fast = fast->next;
+			}
+			else
+			{
+				slow = NULL;
+				//return slow;
+			}
+		}
+		while (fast)
+		{
+			fast = fast->next;
+			slow = slow->next;
+		}
+		return slow;
+	}
+	/*
 	ListNode* FindKthToTail(ListNode* pHead, int k) {
 		vector<ListNode*> v;
 		ListNode* t = pHead;
@@ -67,6 +92,8 @@ public:
 			return NULL;
 		}
 	}
+	*/
+	
 };
 
 int main()
