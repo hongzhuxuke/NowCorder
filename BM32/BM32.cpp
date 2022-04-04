@@ -43,8 +43,22 @@ BM32 合并二叉树
 class Solution {
 public:
 
+#if 1  //牛人解体法
+	TreeNode* mergeTrees(TreeNode* t1, TreeNode* t2) {
+		if (t1 == NULL) return t2;
+		else if (t2 == NULL) return t1;
+		else {
+			TreeNode* pt = new TreeNode(t1->val + t2->val);
+			pt->left = mergeTrees(t1->left, t2->left);
+			pt->right = mergeTrees(t1->right, t2->right);
+			return pt;
+		}
+
+	}
+#else
 	TreeNode* mergeTrees(TreeNode* t1, TreeNode* t2) {
 		// write code here
+		//TreeNode* pp = new TreeNode;
 		TreeNode* pT;
 		buildT(&pT, t1, t2);
 		return pT;
@@ -71,6 +85,7 @@ public:
 			buildT(&(*T)->right, t1->right, t2->right);
 		}
 	}
+#endif
 };
 
 int main()
