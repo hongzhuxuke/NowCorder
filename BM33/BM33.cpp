@@ -27,6 +27,8 @@ BM33 二叉树的镜像
 */
 #include <iostream>
 
+#include <vector>
+using namespace std;
 
   struct TreeNode {
  	int val;
@@ -51,5 +53,6 @@ public:
 
 int main()
 {
+	vector<int> dp(4, 4);
     std::cout << "Hello World!\n";
 }

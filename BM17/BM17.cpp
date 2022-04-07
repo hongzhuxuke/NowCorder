@@ -38,7 +38,9 @@ nums为空，返回-1
 2 不存在nums中因此返回 -1
 */
 #include <iostream>
-
+#include <concurrent_priority_queue.h>
+#include <queue>
+using namespace std;
 class Solution {
 public:
 
@@ -79,6 +81,16 @@ public:
 
 int main()
 {
+	vector< vector<int>> v;
+	v.push_back({2,3,4,7});
+
+	priority_queue<int,vector<int>, greater<int>> iq;
+	iq.push(2);
+	iq.push(3);
+	iq.push(5);
+	iq.push(4);
+	iq.push(1);
+
     std::cout << "Hello World!\n";
 }
 

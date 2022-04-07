@@ -66,8 +66,6 @@ public:
 		string strRef(temp);
 		delete[]temp;
 		return strRef;
-
-
 	}
 };
 int main()
