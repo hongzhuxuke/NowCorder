@@ -14,132 +14,91 @@ public:
 	 * @param IP string字符串 一个IP地址字符串
 	 * @return string字符串
 	 */
-	enum eFlage
-	{
-		eFlage_IPv4 = 0,
-		eFlage_IPv6,
-		eFlage_Neither,
-	};
-
-	bool IsIPv4(vector<string> vec)
-	{
-		bool bRef = false;
-		if (vec.size() == 4)
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				string str = vec[i];
-				if (str.at(0) == '0')
-				{
-					bRef = false;
-					break;
-				}
-				else
-				{
-					int in = atoi(str.c_str());
-					if (in > 0 && in <= 255)
-					{
-						bRef = true;
-					}
-					//第一次未考虑   1a1  这种情况
-					for (int i = 0; i < str.length(); i++)
-					{
-						if (str.at(i) < '0' || str.at(i) > '9')
-							return false;
-					}
-				}
-			}
-		}
-		else
-		{
-
-		}
-		return bRef;
-	}
-
-	bool IsIPv6(vector<string> vec)
-	{
-		bool bRef = false;
-		if (vec.size() == 8)
-		{
-			for (int i = 0; i < 8; i++)
-			{
-				int iLen = vec[i].length();
-				if (iLen > 0 && iLen <= 4)
-					bRef = true;
-				else
-				{
-					bRef = false;
-					break;
-				}
-			}
-		}
-		else
-		{
-
-		}
-		return bRef;
-	}
 	string solve(string IP) {
-		// write code here
-		vector<string> strIps;
-		eFlage flage = eFlage::eFlage_Neither;
-		string strIp = "";
-		int LastSpit = -1;
-		for (int i = 0; i < IP.length(); i++)
-		{
-			char temp[2]{ '\0' };
-			temp[0] = IP.at(i);
-			if ((temp[0] >= '0' && temp[0] <= '9'))
-			{
-				strIp.append(temp);
-			}
-			else if ((temp[0] >= 'a' && temp[0] <= 'f')
-				|| (temp[0] >= 'A' && temp[0] <= 'F'))
-			{
-				if (flage == eFlage_IPv4)
-				{
-					return "Neither";
+		if (isIp4(IP)) return "IPv4";
+		else if (isIp6(IP)) return "IPv6";
+		else return "Neither";
+	}
+
+	vector<string> split(string ip, char c) {
+		vector<string> ref;
+		string str;
+		char temp[2]{ '\0' };
+		for (int i = 0; i < ip.length(); i++) {
+			temp[0] = ip.at(i);
+			//逻辑判断清楚
+			if (temp[0] == c) {
+				if (i == 0) return ref;
+				else if ((i + 1 < ip.length() && ip.at(i + 1) == c) || i == ip.length() - 1) {
+					vector<string> ref2;
+					return ref2;
 				}
-				else
-				{
-					strIp.append(temp);
+				else {
+					ref.push_back(str);
+					str = "";
 				}
-
 			}
-			else if (i > LastSpit + 1 && i < IP.length() - 1 && temp[0] == '.' && flage != eFlage_IPv6)
-			{
-				strIps.push_back(strIp);
-				strIp = "";
-				flage = eFlage_IPv4;
-				LastSpit = i;
+			else {
+				str.append(temp);
 			}
-			else if (i > LastSpit + 1 && i < IP.length() - 1 && temp[0] == ':' && flage != eFlage_IPv4)
-			{
-				strIps.push_back(strIp);
-				strIp = "";
-				flage = eFlage_IPv6;
-				LastSpit = i;
-			}
-			else return "Neither";
-
-			if (i == IP.length() - 1) strIps.push_back(strIp);//开始忘记最后一个数据保存
+			//i++;//重复++
+		}
+		if (str.length() > 0) {
+			ref.push_back(str);
+			str = "";
 		}
 
-		string ref = "Neither";
-		if (flage == eFlage_IPv4 && IsIPv4(strIps))
-		{
-			ref = "IPv4";
-		}
-		else if (flage == eFlage_IPv6 && IsIPv6(strIps))
-		{
-			ref = "IPv6";
-		}
-		else
-		{
-			return "Neither";
-		}
 		return ref;
+	}
+
+	bool  isIp4(string IP) {
+		bool bRef = false;
+		vector<string> strV = split(IP, '.');
+		string strT = "";
+		if (strV.size() == 4) {
+			for (int i = 0; i < 4; i++) {
+				int iN = 0;
+				strT = strV[i];
+				if (strT[0] == '0' && strT.length() > 0) return bRef;
+				for (int j = 0; j < strT.length(); j++) {
+					if (strT.at(j) >= '0' && strT.at(j) <= '9') {
+						iN *= 10;
+						iN += (strT.at(j) - '0');//取数坐标 是 j 不是 i
+					}
+					else return bRef;
+				}
+				if (iN < 0 || iN > 255) return bRef;
+			}
+
+		}
+		else return false;
+		return true;
+	}
+
+	bool  isIp6(string IP) {
+		bool bRef = false;
+		vector<string> strV = split(IP, ':');
+		string strT = "";
+		if (strV.size() == 8) {
+			for (int i = 0; i < 8; i++) {
+				strT = strV[i];
+				int iN = 0;
+				if (strT.length() > 4) return false;
+				for (int j = 0; j < strT.length(); j++) {
+					if (
+						(strT.at(j) >= '0' && strT.at(j) <= '9')
+						|| (strT.at(j) >= 'a' && strT.at(j) <= 'f')
+						|| (strT.at(j) >= 'A' && strT.at(j) <= 'F')) {
+						continue;
+					}
+					else return bRef;
+				}
+
+			}
+
+		}
+		else return false;
+		return true;
 	}
 };
 
