@@ -62,7 +62,7 @@ public:
 			int iC = right - left + 1;
 			int iL = min;
 			int iR = right;
-
+			iRef %= 1000000007;//漏掉取模计算
 			for (; iL >= left && iR > min; iL--)//此处 用iL和iR
 			{
 				for (; iL >= left && iR > min; iR--)
@@ -90,7 +90,7 @@ public:
 				//data[left+iC] = temp[iC++];//本行先计算“=”号右侧取temp的值，使得iC++后赋值给data的时候，iC已经计算过++操作了
 				data[left + iC++] = temp[iC];
 			}
-			return iRef;
+			return iRef%1000000007;
 		}
 
 
