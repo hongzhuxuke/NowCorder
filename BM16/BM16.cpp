@@ -33,58 +33,93 @@ BM16 删除有序链表中重复的元素-II
  	struct ListNode *next;
   };
  
+ /**
+ * struct ListNode {
+ *	int val;
+ *	struct ListNode *next;
+ * };
+ */
 
-class Solution {
-public:
+ class Solution {
+ public:
+	 ListNode* deleteDuplicates(ListNode* head) {
+		 ListNode* refHead = new ListNode(0);
+		 refHead->next = head;
+		 ListNode* res = refHead;
+		 while (res)
+		 {
+			 if (res->next && res->next->next && res->next->val == res->next->next->val) {
+				 int temp = res->next->val;
+				 while (res->next && res->next->val == temp)
+				 {
+					 ListNode* t = res->next;
+					 res->next = res->next->next;
+					 t->next = NULL;
+					 delete t;
+					 t = NULL;
+				 }
+			 }
+			 else
+			 {
+				 res = res->next;
+			 }
 
-	ListNode* deleteDuplicates(ListNode* head) {
-		ListNode* hT = head;
-		ListNode* delHead = NULL;
-		ListNode* del = NULL;
-		while (hT)
-		{
-			if (hT->next && hT->val == hT->next->val)
-			{
-				if (delHead == NULL) delHead = hT;
-				hT = hT->next;
-			}
-			else if (/*hT->val!=hT->next->val && */delHead)//hT->next 有可能为NULL
-			{
-				ListNode* temp = hT->next;
-				if (hT)//避免死循环
-					hT->next = NULL;
-				hT = temp;
-				head = hT;
-				delete delHead;
-				delHead = NULL;
-			}
-			else if (hT->next && hT->next->next && hT->next->val == hT->next->next->val)//hT->next 合法性校验  
-			{
-				ListNode* t = hT->next->next;
-				hT->next->next = hT->next->next->next;
-				t->next = NULL;
-				delete t;
-				t = NULL;
-				if (NULL == del)
-					del = hT->next;
-			}
-			else if (del)
-			{
-				ListNode* t = hT->next;
-				if (hT && hT->next)//合法性校验
-					hT->next = hT->next->next;
-				t->next = NULL;
-				delete t;
-				t = NULL;
-				del = NULL;
-			}
-			else {
-				hT = hT->next;
-			}
-		}
-		return head;
-	}
-};
+		 }
+		 return refHead->next;
+	 }
+ };
+
+//class Solution {
+//public:
+//
+//	ListNode* deleteDuplicates(ListNode* head) {
+//		ListNode* hT = head;
+//		ListNode* delHead = NULL;
+//		ListNode* del = NULL;
+//		while (hT)
+//		{
+//			if (hT->next && hT->val == hT->next->val)
+//			{
+//				if (delHead == NULL) delHead = hT;
+//				hT = hT->next;
+//			}
+//			else if (/*hT->val!=hT->next->val && */delHead)//hT->next 有可能为NULL
+//			{
+//				ListNode* temp = hT->next;
+//				if (hT)//避免死循环
+//					hT->next = NULL;
+//				hT = temp;
+//				head = hT;
+//				delete delHead;
+//				delHead = NULL;
+//			}
+//			else if (hT->next && hT->next->next && hT->next->val == hT->next->next->val)//hT->next 合法性校验  
+//			{
+//				ListNode* t = hT->next->next;
+//				hT->next->next = hT->next->next->next;
+//				t->next = NULL;
+//				delete t;
+//				t = NULL;
+//				if (NULL == del)
+//					del = hT->next;
+//			}
+//			else if (del)
+//			{
+//				ListNode* t = hT->next;
+//				if (hT && hT->next)//合法性校验
+//					hT->next = hT->next->next;
+//				t->next = NULL;
+//				delete t;
+//				t = NULL;
+//				del = NULL;
+//			}
+//			else {
+//				hT = hT->next;
+//			}
+//		}
+//		return head;
+//	}
+//};
 
 int main()
 {
